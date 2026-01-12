@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StatusBar, Text, TextInput, View } from 'react-native';
+import { FlatList, StatusBar, Text, TextInput, View, StyleSheet } from 'react-native';
+
+// store original data for filtering
+let originalData = [];
 
 const App = () => {
     const [myData, setMyData] = useState([]);
@@ -8,14 +11,34 @@ const App = () => {
 
     useEffect(() => {
         fetch(myurl)
-            .then(response => response.json())
-            .then(json => setMyData(json))
-            .catch(err => console.log(err));
+            .then((response) => response.json())
+            .then((myJson) => {
+                if (originalData.length < 1) {
+                    setMyData(myJson);
+                    originalData = myJson;
+                }
+            })
+            .catch((err) => console.log(err));
     }, []);
 
+    // Filter by payment_method OR payment_status
+    const FilterData = (text) => {
+        const t = text.trim().toLowerCase();
+
+        if (t !== '') {
+            const filtered = originalData.filter((item) =>
+                String(item.payment_method).toLowerCase().includes(t) ||
+                String(item.payment_status).toLowerCase().includes(t)
+            );
+            setMyData(filtered);
+        } else {
+            setMyData(originalData);
+        }
+    };
+
     const renderItem = ({ item }) => (
-        <View style={{ borderWidth: 1, padding: 8, marginBottom: 6 }}>
-            <Text>Payment ID: {item.paymentid}</Text>
+        <View style={styles.row}>
+            <Text style={styles.title}>Payment ID: {item.paymentid}</Text>
             <Text>Amount: {item.amount}</Text>
             <Text>Status: {item.payment_status}</Text>
             <Text>Method: {item.payment_method}</Text>
@@ -23,10 +46,14 @@ const App = () => {
     );
 
     return (
-        <View style={{ padding: 12 }}>
+        <View style={{ flex: 1, padding: 12 }}>
             <StatusBar />
-            <Text>Search:</Text>
-            <TextInput style={{ borderWidth: 1, marginBottom: 10, padding: 6 }} />
+            <Text>Search (method/status):</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="e.g. visa or completed"
+                onChangeText={(text) => FilterData(text)}
+            />
 
             <FlatList
                 data={myData}
@@ -38,3 +65,21 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+    input: {
+        borderWidth: 1,
+        padding: 8,
+        marginTop: 6,
+        marginBottom: 10,
+    },
+    row: {
+        borderWidth: 1,
+        padding: 10,
+        marginVertical: 6,
+    },
+    title: {
+        fontWeight: 'bold',
+        marginBottom: 4,
+    },
+});
