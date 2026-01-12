@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useEffect,useState} from 'react';
+import { FlatList, StatusBar, Text, TextInput, View} from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const App = () => {
+    const [myData, setMyData] = useState([]);
+
+    //Add fetch() - Exercise 1A
+    const myurl = "https://onlinecardappwebservice-cz5e.onrender.com/allcards"
+    useEffect(()=>{
+        fetch(myurl)
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson)=>{
+                setMyData(myJson);
+            });
+    },[]);
+
+    const renderItem = ({item, index}) => {
+        return (
+            <View>
+                <Text style={{borderWidth:1}}>{item.card_name}</Text>
+            </View>
+        );
+    };
+
+    return (
+        <View>
+            <StatusBar/>
+            <Text>Search:</Text>
+            <TextInput style={{borderWidth:1}}/>
+            <FlatList data={myData} renderItem={renderItem} />
+        </View>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
