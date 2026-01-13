@@ -38,15 +38,11 @@ const App = () => {
 
     const renderItem = ({ item }) => (
         <View style={styles.row}>
+            <Text>Amount: ${item.amount}</Text>
             <Text style={styles.title}>
                 {item.payment_method.toUpperCase()}
             </Text>
-
-            <Image
-                source={{ uri: item.image_url }}
-                style={styles.image}
-                resizeMode="contain"
-            />
+            <Text>Status: {item.payment_status}</Text>
         </View>
     );
 
@@ -94,10 +90,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 
-    image: {
-        width: 80,
-        height: 50,
-    },
 
 
 });
