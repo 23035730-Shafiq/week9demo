@@ -62,7 +62,7 @@ const App = () => {
                 onChangeText={(text) => FilterData(text)}
             />
 
-            <FlatList
+            <FlatListS
                 data={myData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.paymentid.toString()}
@@ -82,27 +82,22 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         borderWidth: 1,
-        padding: 10,
+        padding: 12,
         marginVertical: 6,
     },
+
     title: {
         fontWeight: 'bold',
-        marginBottom: 4,
-    },
-    info: {
-        flex: 1,
-        paddingRight: 10,
-    },
-
-    card: {
-        justifyContent: 'center',
-        alignItems: 'center',
+        fontSize: 16,
     },
 
     image: {
         width: 80,
         height: 50,
     },
+
 
 });
