@@ -37,13 +37,7 @@ const App = () => {
     };
 
     const renderItem = ({ item }) => (
-        <View style={styles.card}>
-            <Image
-                source={{ uri: item.image_url }}
-                style={styles.image}
-                resizeMode="contain"
-            />
-
+        <View style={styles.row}>
             <View style={styles.info}>
                 <Text style={styles.title}>
                     {item.payment_method.toUpperCase()}
@@ -51,8 +45,17 @@ const App = () => {
                 <Text>Amount: ${item.amount}</Text>
                 <Text>Status: {item.payment_status}</Text>
             </View>
+
+            <View style={styles.card}>
+                <Image
+                    source={{ uri: item.image_url }}
+                    style={styles.image}
+                    resizeMode="contain"
+                />
+            </View>
         </View>
     );
+
 
     return (
         <View style={{ flex: 1, padding: 12 }}>
@@ -91,4 +94,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 4,
     },
+    info: {
+        flex: 1,
+        paddingRight: 10,
+    },
+
+    card: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    image: {
+        width: 80,
+        height: 50,
+    },
+
 });
