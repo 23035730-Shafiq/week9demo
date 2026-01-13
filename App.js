@@ -38,23 +38,18 @@ const App = () => {
 
     const renderItem = ({ item }) => (
         <View style={styles.row}>
-            <View style={styles.info}>
-                <Text style={styles.title}>
-                    {item.payment_method.toUpperCase()}
-                </Text>
-                <Text>Amount: ${item.amount}</Text>
-                <Text>Status: {item.payment_status}</Text>
-            </View>
+            <Text style={styles.title}>
+                {item.payment_method.toUpperCase()}
+            </Text>
 
-            <View style={styles.card}>
-                <Image
-                    source={{ uri: item.image_url }}
-                    style={styles.image}
-                    resizeMode="contain"
-                />
-            </View>
+            <Image
+                source={{ uri: item.image_url }}
+                style={styles.image}
+                resizeMode="contain"
+            />
         </View>
     );
+
 
 
     return (
@@ -86,6 +81,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     row: {
+        flexDirection: 'row',
         borderWidth: 1,
         padding: 10,
         marginVertical: 6,
