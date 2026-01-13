@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StatusBar, Text, TextInput, View, StyleSheet } from 'react-native';
+import { FlatList, StatusBar, Text, TextInput, View, StyleSheet,Image } from 'react-native';
 
 // store original data for filtering
 let originalData = [];
@@ -62,7 +62,7 @@ const App = () => {
                 onChangeText={(text) => FilterData(text)}
             />
 
-            <FlatListS
+            <FlatList
                 data={myData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.paymentid.toString()}
