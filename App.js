@@ -37,11 +37,20 @@ const App = () => {
     };
 
     const renderItem = ({ item }) => (
-        <View style={styles.row}>
-            <Text style={styles.title}>Payment ID: {item.paymentid}</Text>
-            <Text>Amount: {item.amount}</Text>
-            <Text>Status: {item.payment_status}</Text>
-            <Text>Method: {item.payment_method}</Text>
+        <View style={styles.card}>
+            <Image
+                source={{ uri: item.image_url }}
+                style={styles.image}
+                resizeMode="contain"
+            />
+
+            <View style={styles.info}>
+                <Text style={styles.title}>
+                    {item.payment_method.toUpperCase()}
+                </Text>
+                <Text>Amount: ${item.amount}</Text>
+                <Text>Status: {item.payment_status}</Text>
+            </View>
         </View>
     );
 
