@@ -13,11 +13,9 @@ const App = () => {
         fetch(myurl)
             .then((response) => response.json())
             .then((myJson) => {
-                if (originalData.length < 1) {
                     setMyData(myJson);
                     originalData = myJson;
-                }
-            })
+                })
             .catch((err) => console.log(err));
     }, []);
 
