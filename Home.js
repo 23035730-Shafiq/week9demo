@@ -4,7 +4,7 @@ import { StatusBar, Button, FlatList, Text, View, Image, TextInput } from 'react
 let originalData = [];
 
 const BASE_URL = "https://week9demo.onrender.com/"; // <-- CHANGE THIS
-const GET_URL = `${BASE_URL}/payments`;
+const GET_URL = `${BASE_URL}payments`;
 
 const Home = ({ navigation }) => {
     const [myData, setMyData] = useState([]);

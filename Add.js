@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StatusBar, View, Button, Text, TextInput, Alert } from 'react-native';
 
 const BASE_URL = "https://week9demo.onrender.com/"; // <-- CHANGE THIS
-const POST_URL = `${BASE_URL}/payments`;
+const POST_URL = `${BASE_URL}payments`;
 
 const Add = ({ navigation, route }) => {
     const [amount, setAmount] = useState("");
